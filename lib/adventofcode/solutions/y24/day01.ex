@@ -19,8 +19,7 @@ defmodule AdventOfCode.Solutions.Y24.Day01 do
     |> Enum.unzip()
     |> then(fn {list1, list2} -> {Enum.sort(list1), Enum.sort(list2)} end)
     |> then(fn {list1, list2} -> Enum.zip(list1, list2) end)
-    |> Enum.map(fn {a, b} -> abs(a - b) end)
-    |> Enum.sum()
+    |> Enum.reduce(0, fn {a, b}, acc -> acc + abs(a - b) end)
   end
 
   def part_two(problem) do
@@ -28,8 +27,9 @@ defmodule AdventOfCode.Solutions.Y24.Day01 do
     |> Enum.unzip()
     |> then(fn {list1, list2} -> {list1, Enum.frequencies(list2)} end)
     |> then(fn {list1, frequencies} ->
-      Enum.map(list1, fn n -> n * Map.get(frequencies, n, 0) end)
+      Enum.reduce(list1, 0, fn n, acc ->
+        acc + (n * Map.get(frequencies, n, 0))
+      end)
     end)
-    |> Enum.sum()
   end
 end
