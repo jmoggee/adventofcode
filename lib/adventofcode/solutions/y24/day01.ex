@@ -28,7 +28,7 @@ defmodule AdventOfCode.Solutions.Y24.Day01 do
     |> then(fn {list1, list2} -> {list1, Enum.frequencies(list2)} end)
     |> then(fn {list1, frequencies} ->
       Enum.reduce(list1, 0, fn n, acc ->
-        acc + (n * Map.get(frequencies, n, 0))
+        acc + n * Map.get(frequencies, n, 0)
       end)
     end)
   end
